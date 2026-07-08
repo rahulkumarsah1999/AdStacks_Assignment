@@ -117,7 +117,9 @@ The dashboard is optimized for:
 
 ## 📸 Dashboard Preview
 
-![AdStacks Dashboard](assets/screenshots/dashboard.png)
+<p align="center">
+  <img src="./assets/screenshots/dashboard.png" width="100%" alt="AdStacks Dashboard"/>
+</p>
 
 
 
