@@ -101,7 +101,7 @@ The dashboard is optimized for:
 
 - Desktop
 - Tablet
-- Large Screens
+- Mobile Screens
 
 ---
 
