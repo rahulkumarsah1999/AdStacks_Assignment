@@ -1,7 +1,7 @@
+import 'package:dashboard/core/theme/app_colors.dart';
+import 'package:dashboard/features/dashboard/data/calendar_data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../data/calendar_data.dart';
 import 'calendar_grid.dart';
 
 class CalendarCard extends StatelessWidget {
@@ -19,38 +19,33 @@ class CalendarCard extends StatelessWidget {
                 dashboardCalendar.title,
                 style: GoogleFonts.poppins(
                   color: AppColors.textLightPrimary,
-                  fontSize: 13,
+                  fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-            const Icon(
-              Icons.calendar_month_outlined,
-              color: AppColors.textLightSecondary,
-              size: 18,
-            ),
+            const Icon(Icons.calendar_month_outlined, color: AppColors.textLightSecondary, size: 16),
           ],
         ),
-        const SizedBox(height: 14),
+        const SizedBox(height: 8),
 
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(16), // Slightly smaller radius
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   _DropdownPill(label: dashboardCalendar.month),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 4),
                   _DropdownPill(label: dashboardCalendar.year.toString()),
                 ],
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 4),
 
               Row(
                 children: [
@@ -61,7 +56,7 @@ class CalendarCard extends StatelessWidget {
                           day,
                           style: GoogleFonts.poppins(
                             color: AppColors.textDarkSecondary,
-                            fontSize: 10.5,
+                            fontSize: 10,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -69,7 +64,7 @@ class CalendarCard extends StatelessWidget {
                     ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
 
               CalendarGrid(
                 daysInMonth: dashboardCalendar.daysInMonth,
@@ -90,10 +85,10 @@ class _DropdownPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), // Padding reduced
       decoration: BoxDecoration(
-        color: AppColors.cardDarkAlt.withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(8),
+        color: AppColors.cardDarkAlt.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -102,13 +97,12 @@ class _DropdownPill extends StatelessWidget {
             label,
             style: GoogleFonts.poppins(
               color: AppColors.textDarkPrimary,
-              fontSize: 11,
+              fontSize: 10, // Font size reduced
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(width: 4),
-          Icon(Icons.keyboard_arrow_down_rounded,
-              color: AppColors.textDarkSecondary, size: 14),
+          const SizedBox(width: 2),
+          Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.textDarkSecondary, size: 12),
         ],
       ),
     );

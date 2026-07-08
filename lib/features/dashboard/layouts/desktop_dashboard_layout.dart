@@ -26,10 +26,10 @@ class DesktopDashboardLayout extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+                  padding: const EdgeInsets.fromLTRB(24, 10, 24, 0),
                   child: const TopBar(),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 10),
                 Expanded(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,

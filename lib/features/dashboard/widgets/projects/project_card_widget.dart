@@ -1,3 +1,4 @@
+import 'package:dashboard/core/utils/responsive.dart';
 import 'package:dashboard/features/dashboard/models/project_card_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,8 @@ class ProjectCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -27,11 +30,13 @@ class ProjectCardWidget extends StatelessWidget {
               color: Colors.white.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Padding(padding: const EdgeInsets.all(6),
-            child: Image.asset(project.imagePath,fit: BoxFit.contain,),
-            )
+            child: Padding(
+              padding: const EdgeInsets.all(6),
+              child: Image.asset(project.imagePath, fit: BoxFit.contain),
+            ),
           ),
           const SizedBox(width: 10),
+
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,45 +44,41 @@ class ProjectCardWidget extends StatelessWidget {
               children: [
                 Text(
                   project.title.replaceAll('\n', ' '),
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.poppins(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: isMobile ? 11 : 12,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 4),
+
                 Row(
                   children: [
-                    Text(
-                      project.tag,
-                      style: GoogleFonts.poppins(
-                        color: Colors.white70,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
+                    Flexible(
+                      child: Text(
+                        project.tag,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.poppins(
+                          color: Colors.white70,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
-
-                    const SizedBox(width: 8),
-
-                    Container(
-                      width: 3,
-                      height: 3,
-                      decoration: const BoxDecoration(
-                        color: Colors.white54,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-
-                    const SizedBox(width: 8),
-
-                    Text(
-                      'See project details',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 10,
-                        decoration: TextDecoration.underline,
+                    const SizedBox(width: 6),
+                    const Text("•", style: TextStyle(color: Colors.white54, fontSize: 10)),
+                    const SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        'See project details',
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 10,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ],
@@ -85,11 +86,13 @@ class ProjectCardWidget extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 4),
-          const Icon(
+
+          const SizedBox(width: 8),
+
+          Icon(
             Icons.edit_outlined,
             color: Colors.white,
-            size: 14,
+            size: isMobile ? 16 : 18,
           ),
         ],
       ),

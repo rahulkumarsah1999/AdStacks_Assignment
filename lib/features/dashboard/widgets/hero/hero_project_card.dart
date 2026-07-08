@@ -30,7 +30,7 @@ class HeroProjectCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
               child: Image.asset(
-                'assets/images/dashboard.png',
+                'assets/images/img.png',
                 fit: BoxFit.cover,
                 alignment: Alignment.centerRight,
               ),

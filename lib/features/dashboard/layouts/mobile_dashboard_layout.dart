@@ -18,55 +18,50 @@ class MobileDashboardLayout extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.sectionBg,
 
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: Builder(
+          builder: (innerContext) {
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: TopBar(
+                  onMenuTap: () {
+                    Scaffold.of(innerContext).openDrawer();
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+
       drawer: Drawer(
         backgroundColor: AppColors.sidebarBg,
         child: const Sidebar(),
       ),
 
-      body: Builder(
-        builder: (innerContext) {
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TopBar(
-                  onMenuTap: () {
-                    Scaffold.of(innerContext).openDrawer();
-                  },
-                ),
-
-                const SizedBox(height: 18),
-
-                const HeroProjectCard(),
-
-                const SizedBox(height: 16),
-
-                const AllProjectsSection(),
-
-                const SizedBox(height: 16),
-
-                const TopCreators(),
-
-                const SizedBox(height: 16),
-
-                const PerformanceChartCard(),
-
-                const SizedBox(height: 16),
-
-                const CalendarCard(),
-
-                const SizedBox(height: 16),
-
-                const PeopleEventCard(event: birthdayEvent),
-
-                const SizedBox(height: 16),
-
-                const PeopleEventCard(event: anniversaryEvent),
-              ],
-            ),
-          );
-        },
+      // SingleChildScrollView sirf body ke content ke liye
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const HeroProjectCard(),
+            const SizedBox(height: 16),
+            const AllProjectsSection(),
+            const SizedBox(height: 16),
+            const TopCreators(),
+            const SizedBox(height: 16),
+            const PerformanceChartCard(),
+            const SizedBox(height: 16),
+            const CalendarCard(),
+            const SizedBox(height: 16),
+            const PeopleEventCard(event: birthdayEvent),
+            const SizedBox(height: 16),
+            const PeopleEventCard(event: anniversaryEvent),
+          ],
+        ),
       ),
     );
   }

@@ -20,22 +20,76 @@ class PerformanceChartCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final isNarrow = constraints.maxWidth < 320;
+
+              if (isNarrow) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Over All Performance',
+                          style: GoogleFonts.poppins(
+                            color: AppColors.textDarkPrimary,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          'The Years',
+                          style: GoogleFonts.poppins(
+                            color: AppColors.textDarkPrimary,
+                            fontSize: 11.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    const Wrap(
+                      spacing: 12,
+                      runSpacing: 8,
+                      children: [
+                        LegendDot(color: AppColors.pink, label: 'Pending'),
+                        LegendDot(color: AppColors.purple, label: 'Project Done'),
+                      ],
+                    ),
+                  ],
+                );
+              }
+
+              return Row(
                 children: [
-                  Text('Over All Performance',
-                      style: GoogleFonts.poppins(color: AppColors.textDarkPrimary, fontSize: 15, fontWeight: FontWeight.w600)),
-                  Text('The Years',
-                      style: GoogleFonts.poppins(color: AppColors.textDarkPrimary, fontSize: 11.5)),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Over All Performance',
+                        style: GoogleFonts.poppins(
+                          color: AppColors.textDarkPrimary,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        'The Years',
+                        style: GoogleFonts.poppins(
+                          color: AppColors.textDarkPrimary,
+                          fontSize: 11.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  const LegendDot(color: AppColors.pink, label: 'Pending'),
+                  const SizedBox(width: 14),
+                  const LegendDot(color: AppColors.purple, label: 'Project Done'),
                 ],
-              ),
-              const Spacer(),
-              const LegendDot(color: AppColors.pink, label: 'Pending'),
-              const SizedBox(width: 14),
-              const LegendDot(color: AppColors.purple, label: 'Project Done'),
-            ],
+              );
+            },
           ),
           const SizedBox(height: 25),
           SizedBox(
@@ -60,7 +114,11 @@ class PerformanceChartCard extends StatelessWidget {
                       return touchedSpots.map((spot) {
                         return LineTooltipItem(
                           '${performanceChart.years[spot.x.toInt()]}\n${spot.y.toInt()}',
-                          GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                          GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
                         );
                       }).toList();
                     },
@@ -72,8 +130,13 @@ class PerformanceChartCard extends StatelessWidget {
                       showTitles: true,
                       interval: 10,
                       reservedSize: 30,
-                      getTitlesWidget: (value, _) => Text(value.toInt().toString(),
-                          style: GoogleFonts.poppins(fontSize: 10, color: AppColors.textLightSecondary)),
+                      getTitlesWidget: (value, _) => Text(
+                        value.toInt().toString(),
+                        style: GoogleFonts.poppins(
+                          fontSize: 10,
+                          color: AppColors.textLightSecondary,
+                        ),
+                      ),
                     ),
                   ),
                   bottomTitles: AxisTitles(
@@ -83,14 +146,25 @@ class PerformanceChartCard extends StatelessWidget {
                       reservedSize: 22,
                       getTitlesWidget: (value, _) {
                         int index = value.toInt();
-                        if (index < 0 || index >= performanceChart.years.length) return const SizedBox.shrink();
-                        return Text(performanceChart.years[index],
-                            style: GoogleFonts.poppins(fontSize: 10, color: AppColors.textLightSecondary));
+                        if (index < 0 || index >= performanceChart.years.length) {
+                          return const SizedBox.shrink();
+                        }
+                        return Text(
+                          performanceChart.years[index],
+                          style: GoogleFonts.poppins(
+                            fontSize: 10,
+                            color: AppColors.textLightSecondary,
+                          ),
+                        );
                       },
                     ),
                   ),
-                  topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  topTitles: const AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
+                  ),
+                  rightTitles: const AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
+                  ),
                 ),
                 clipData: const FlClipData.all(),
                 lineBarsData: [
@@ -107,15 +181,15 @@ class PerformanceChartCard extends StatelessWidget {
 
   static LineChartBarData _buildLine(List<double> values, Color color) {
     return LineChartBarData(
-      spots: List.generate(values.length, (i) => FlSpot(i.toDouble(), values[i])),
+      spots: List.generate(
+        values.length,
+        (i) => FlSpot(i.toDouble(), values[i]),
+      ),
       isCurved: true,
       curveSmoothness: 0.35,
       color: color,
       barWidth: 3,
-      dotData: FlDotData(
-        show: true,
-        checkToShowDot: (spot, barData) => false,
-      ),
+      dotData: FlDotData(show: true, checkToShowDot: (spot, barData) => false),
       belowBarData: BarAreaData(
         show: true,
         gradient: LinearGradient(

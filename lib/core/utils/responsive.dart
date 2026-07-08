@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 enum DeviceType {mobile, tablet, desktop }
 
 class Responsive {
-  static const double mobileMax = 700;
-  static const double tabletMax = 1100;
+  static const double mobileMax = 800;
+  static const double tabletMax = 1200;
 
   static DeviceType deviceTypeOf (BuildContext context){
     final width = MediaQuery.of(context).size.width;

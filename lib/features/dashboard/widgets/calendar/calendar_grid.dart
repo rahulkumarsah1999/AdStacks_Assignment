@@ -14,41 +14,36 @@ class CalendarGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cells = <Widget>[];
-
-    for (int day = 1; day <= daysInMonth; day++) {
-      final isHighlighted = highlightedDays.contains(day);
-
-      cells.add(
-        AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            margin: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              color: isHighlighted ? AppColors.purple : Colors.transparent,
-              shape: BoxShape.circle,
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              '$day',
-              style: GoogleFonts.poppins(
-                color: isHighlighted
-                    ? Colors.white
-                    : AppColors.textDarkSecondary,
-                fontSize: 11,
-                fontWeight: isHighlighted ? FontWeight.w700 : FontWeight.w400,
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
-    return GridView.count(
-      crossAxisCount: 7,
+    return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      children: cells,
+      itemCount: daysInMonth,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 7,
+        mainAxisSpacing: 0.5,
+        crossAxisSpacing: 0.5,
+        childAspectRatio: 1,
+      ),
+      itemBuilder: (context, index) {
+        final day = index + 1;
+        final isHighlighted = highlightedDays.contains(day);
+
+        return Container(
+          decoration: BoxDecoration(
+            color: isHighlighted ? AppColors.purple : Colors.transparent,
+            shape: BoxShape.circle,
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            '$day',
+            style: GoogleFonts.poppins(
+              color: isHighlighted ? Colors.white : AppColors.textDarkSecondary,
+              fontSize: 10,
+              fontWeight: isHighlighted ? FontWeight.w700 : FontWeight.w400,
+            ),
+          ),
+        );
+      },
     );
   }
 }
